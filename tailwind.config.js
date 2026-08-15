@@ -8,14 +8,14 @@ export default {
     extend: {
       colors: {
         primary: {
-          bg: '#F8F6F0',
-          text: '#171717',
+          bg: '#FFFFFF',
+          text: '#4A3B32',
         },
         secondary: {
-          dark: '#344236',
-          bg: '#E8E1D4',
+          dark: '#5D4037',
+          bg: '#F5EBE1',
         },
-        accent: '#B89B5E',
+        accent: '#8B4513',
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],

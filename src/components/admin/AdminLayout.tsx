@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { supabase } from '../../lib/supabase';
+import logo from '../../assets/logo.png';
 import { 
   LayoutDashboard, 
   FileText, 
@@ -46,7 +47,7 @@ export const AdminLayout: React.FC = () => {
   const SidebarContent = () => (
     <div className="flex flex-col h-full bg-secondary-dark text-primary-bg w-64 flex-shrink-0">
       <div className="p-6">
-        <h2 className="text-2xl font-serif">Spiritual Journey</h2>
+        <img src={logo} alt="Spiritual Journey" className="h-10 w-auto mb-2" />
         <p className="text-sm opacity-70 mt-1 font-sans">Admin Panel</p>
       </div>
       
@@ -126,7 +127,7 @@ export const AdminLayout: React.FC = () => {
       <div className="flex flex-col w-0 flex-1 overflow-hidden">
         {/* Mobile Top Header */}
         <div className="md:hidden flex items-center justify-between bg-secondary-dark px-4 py-3 border-b border-primary-bg/10">
-          <h2 className="text-xl font-serif text-primary-bg">Spiritual Journey</h2>
+          <img src={logo} alt="Spiritual Journey" className="h-8 w-auto" />
           <button
             onClick={() => setIsMobileMenuOpen(true)}
             className="text-primary-bg hover:text-white focus:outline-none"

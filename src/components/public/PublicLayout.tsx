@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Outlet, Link, NavLink } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+import logo from '../../assets/logo.png';
 
 export const PublicLayout: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -22,8 +23,8 @@ export const PublicLayout: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             {/* Logo */}
-            <Link to="/" className="text-2xl font-serif text-primary-text hover:opacity-80 transition-opacity">
-              Spiritual Journey
+            <Link to="/" className="flex items-center hover:opacity-80 transition-opacity">
+              <img src={logo} alt="Spiritual Journey" className="h-12 w-auto" />
             </Link>
 
             {/* Desktop Navigation */}
@@ -105,7 +106,9 @@ export const PublicLayout: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
             <div className="md:col-span-2">
-              <h3 className="text-2xl font-serif mb-4">Spiritual Journey</h3>
+              <Link to="/" className="inline-block mb-4">
+                <img src={logo} alt="Spiritual Journey" className="h-10 w-auto" />
+              </Link>
               <p className="text-primary-bg/70 max-w-sm">
                 A space for biblical reflections, honest conversations, teachings and resources designed to help you grow in your walk with God.
               </p>
