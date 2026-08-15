@@ -1,0 +1,143 @@
+import React, { useState } from 'react';
+import { Outlet, Link, NavLink } from 'react-router-dom';
+import { Menu, X } from 'lucide-react';
+
+export const PublicLayout: React.FC = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const navLinks = [
+    { name: 'Home', path: '/' },
+    { name: 'Blog', path: '/blog' },
+    { name: 'Programs', path: '/programs' },
+    { name: 'Teachings', path: '/teachings' },
+    { name: 'Audio', path: '/audio' },
+    { name: 'Resources', path: '/resources' },
+    { name: 'About', path: '/about' },
+  ];
+
+  return (
+    <div className="min-h-screen flex flex-col bg-primary-bg font-sans text-primary-text">
+      {/* Navigation */}
+      <header className="border-b border-secondary-bg sticky top-0 z-50 bg-primary-bg/90 backdrop-blur-md">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-20">
+            {/* Logo */}
+            <Link to="/" className="text-2xl font-serif text-primary-text hover:opacity-80 transition-opacity">
+              Spiritual Journey
+            </Link>
+
+            {/* Desktop Navigation */}
+            <nav className="hidden md:flex space-x-8">
+              {navLinks.map((link) => (
+                <NavLink
+                  key={link.name}
+                  to={link.path}
+                  className={({ isActive }: { isActive: boolean }) =>
+                    `text-sm font-medium transition-colors ${
+                      isActive ? 'text-accent' : 'text-secondary-dark hover:text-accent'
+                    }`
+                  }
+                >
+                  {link.name}
+                </NavLink>
+              ))}
+            </nav>
+
+            {/* Desktop CTA */}
+            <div className="hidden md:flex">
+              <Link 
+                to="/programs" 
+                className="px-6 py-2.5 bg-accent text-white text-sm font-medium rounded-full hover:bg-accent/90 transition-colors shadow-sm"
+              >
+                Start Your Journey
+              </Link>
+            </div>
+
+            {/* Mobile menu button */}
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="md:hidden p-2 text-secondary-dark hover:text-accent focus:outline-none"
+            >
+              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Navigation */}
+        {isMenuOpen && (
+          <div className="md:hidden bg-primary-bg border-b border-secondary-bg absolute w-full">
+            <div className="px-4 pt-2 pb-6 space-y-1">
+              {navLinks.map((link) => (
+                <NavLink
+                  key={link.name}
+                  to={link.path}
+                  onClick={() => setIsMenuOpen(false)}
+                  className={({ isActive }: { isActive: boolean }) =>
+                    `block px-3 py-3 rounded-md text-base font-medium ${
+                      isActive ? 'bg-secondary-bg text-accent' : 'text-secondary-dark hover:bg-secondary-bg hover:text-accent'
+                    }`
+                  }
+                >
+                  {link.name}
+                </NavLink>
+              ))}
+              <div className="pt-4 px-3">
+                <Link
+                  to="/programs"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="block w-full text-center px-6 py-3 bg-accent text-white text-base font-medium rounded-full hover:bg-accent/90 transition-colors"
+                >
+                  Start Your Journey
+                </Link>
+              </div>
+            </div>
+          </div>
+        )}
+      </header>
+
+      {/* Main Content */}
+      <main className="flex-grow">
+        <Outlet />
+      </main>
+
+      {/* Footer */}
+      <footer className="bg-secondary-dark text-primary-bg pt-16 pb-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+            <div className="md:col-span-2">
+              <h3 className="text-2xl font-serif mb-4">Spiritual Journey</h3>
+              <p className="text-primary-bg/70 max-w-sm">
+                A space for biblical reflections, honest conversations, teachings and resources designed to help you grow in your walk with God.
+              </p>
+            </div>
+            <div>
+              <h4 className="font-serif text-lg mb-4 text-accent">Explore</h4>
+              <ul className="space-y-2 text-primary-bg/80">
+                <li><Link to="/blog" className="hover:text-white transition-colors">Blog</Link></li>
+                <li><Link to="/programs" className="hover:text-white transition-colors">Programs</Link></li>
+                <li><Link to="/audio" className="hover:text-white transition-colors">Audio</Link></li>
+                <li><Link to="/resources" className="hover:text-white transition-colors">Resources</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-serif text-lg mb-4 text-accent">Connect</h4>
+              <ul className="space-y-2 text-primary-bg/80">
+                <li><Link to="/about" className="hover:text-white transition-colors">About Ife Dayo</Link></li>
+                <li><Link to="/contact" className="hover:text-white transition-colors">Contact</Link></li>
+                <li><a href="#" className="hover:text-white transition-colors">Instagram</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">YouTube</a></li>
+              </ul>
+            </div>
+          </div>
+          <div className="border-t border-primary-bg/20 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-primary-bg/50">
+            <p>&copy; {new Date().getFullYear()} Spiritual Journey. All rights reserved.</p>
+            <div className="mt-4 md:mt-0 space-x-4">
+              <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
+              <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+};

@@ -1,0 +1,84 @@
+# Spiritual Journey Implementation Plan
+
+The objective is to build "Spiritual Journey", a modern, elegant, responsive Christian digital-content platform built using React, Vite, TypeScript, Tailwind CSS, React Router, Lucide React, and Supabase. The platform features both a public website and a comprehensive, protected admin dashboard.
+
+## User Review Required
+
+Please review the plan below. The structure strictly follows the phases outlined in your request. Once approved, I will begin execution with Phase 1.
+
+## Open Questions
+
+- Should I initialize the Supabase project locally via the Supabase CLI (generating a local migrations folder) or will you be providing a remote Supabase URL and anon key that we should configure directly?
+- For the rich text editor in the admin panel, do you have a preference (e.g., TipTap, React Quill, or Lexical)? TipTap is generally recommended for modern React applications.
+- Do you have specific font files for Playfair Display/Inter, or should I use Google Fonts via CDN?
+
+## Proposed Changes
+
+We will develop the application in the following order:
+
+### Phase 1: Project initialization and design system
+- Initialize a React + Vite + TypeScript project in the workspace root.
+- Install and configure Tailwind CSS, React Router, and Lucide React.
+- Set up the color system (#F8F6F0, #171717, #344236, #B89B5E, #E8E1D4) and typography (Playfair Display/Inter) in Tailwind configuration.
+- Set up a clean folder structure (`components/`, `pages/`, `hooks/`, `lib/`, `types/`).
+
+### Phase 2: Supabase project and database schema
+- Configure Supabase client in `src/lib/supabase.ts`.
+- Define the PostgreSQL schema (profiles, categories, posts, post_tags, tags, programs, audio, videos, resources, daily_reflections, contact_messages, newsletter_subscribers, site_settings, media).
+- Write migration scripts for schema and Row Level Security (RLS) policies.
+
+### Phase 3: Authentication and admin protection
+- Implement Supabase Authentication (Email/Password).
+- Create a protected route wrapper for `/admin/*`.
+- Build the `/admin/login` page.
+
+### Phase 4: Admin dashboard shell
+- Develop the admin layout with sidebar navigation (Dashboard, Posts, Programs, Media, etc.).
+- Build the Admin Dashboard Home with statistics cards (Total Posts, Upcoming Programs, etc.).
+
+### Phase 5: Blog/content management
+- Implement the `/admin/posts` listing table with filters/search.
+- Build the post creator/editor with a rich-text editor, featured image upload, and metadata fields.
+- Set up categories management (`/admin/categories`).
+
+### Phase 6: Media management
+- Integrate Supabase Storage for image uploads.
+- Build the `/admin/media` gallery component for browsing and selecting uploaded images.
+
+### Phase 7: Programs
+- Implement `/admin/programs` for managing upcoming events and programs with necessary date/time/venue fields.
+
+### Phase 8: Public homepage
+- Build the public UI components: Navbar, Footer, Hero section, Featured Story, Today's Word.
+- Wire up the homepage to fetch dynamic data from Supabase.
+
+### Phase 9: Blog pages
+- Implement `/blog` listing page with category filters and pagination.
+- Implement `/blog/:slug` detail page with rich text rendering, author info, and related articles.
+
+### Phase 10: About and contact
+- Build the About page (`/about`) featuring the founder's story.
+- Implement the Contact page (`/contact`) with a form saving to `contact_messages`.
+
+### Phase 11: Audio, video and resources (MVP preparation)
+- Lay out the foundational routing and placeholder components for `/audio`, `/videos`, and `/resources` for future phase implementation as defined in the prompt.
+
+### Phase 12: SEO and performance
+- Implement dynamic `<title>` and `<meta>` tags for the public pages.
+- Ensure proper semantic HTML and responsive adjustments (mobile-first).
+
+### Phase 13 & 14: Testing & Vercel deployment
+- Validate routing, RLS policies, and mobile responsiveness.
+- Prepare `vercel.json` or required build scripts for deployment.
+
+## Verification Plan
+
+### Automated Tests
+- TypeScript compilation check (`tsc --noEmit`).
+- Vite build verification (`npm run build`).
+
+### Manual Verification
+- Walk through the admin login flow and verify protected routes.
+- Create a sample post, category, and program in the admin dashboard.
+- Verify the public homepage and blog listing render the created content correctly.
+- Test mobile layouts using browser DevTools.

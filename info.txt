@@ -1,0 +1,1455 @@
+SPIRITUAL JOURNEY
+Full Product Development Prompt
+
+Build a modern, elegant, responsive Christian digital-content platform called Spiritual Journey.
+
+Spiritual Journey is a personal Christian media and reflection brand founded by Ife Dayo. The platform exists to share God's Word, biblical reflections, teachings, stories, devotionals, audio messages, videos, resources, and upcoming programs that help people grow spiritually, discover purpose, understand their identity, and deepen their relationship with God.
+
+The website must feel like a modern Christian editorial platform, not a traditional church website.
+
+The design should be simple, warm, premium, calm, authentic, and highly readable.
+
+1. CORE TECHNOLOGY
+
+Use:
+
+React
+Vite
+TypeScript
+Tailwind CSS
+React Router
+Lucide React
+Supabase
+PostgreSQL
+Vercel
+Resend for email where required
+
+Do not use:
+
+PHP
+Laravel
+Express
+Node.js backend server
+WordPress
+Firebase
+MongoDB
+
+Use Supabase as the primary backend platform.
+
+Supabase should provide:
+
+PostgreSQL database
+Authentication
+Row Level Security
+Storage
+Database APIs
+Realtime functionality where useful
+
+The application must be deployable to Vercel.
+
+2. PRODUCT STRUCTURE
+
+The system consists of two major applications:
+
+Public Website
+
+Accessible to everyone.
+
+Admin Dashboard
+
+Accessible only to authenticated administrators.
+
+Recommended routes:
+
+Public:
+
+/
+/blog
+/blog/
+/programs
+/programs/
+/teachings
+/audio
+/videos
+/resources
+/about
+/contact
+
+Admin:
+
+/admin/login
+/admin
+/admin/posts
+/admin/posts/create
+/admin/posts/edit/
+/admin/programs
+/admin/programs/create
+/admin/programs/edit/
+/admin/media
+/admin/audio
+/admin/videos
+/admin/resources
+/admin/categories
+/admin/messages
+/admin/subscribers
+/admin/settings
+
+Protect every admin route.
+
+Unauthenticated users must be redirected to:
+
+/admin/login
+
+3. BRAND IDENTITY
+
+Brand name:
+
+Spiritual Journey
+
+Founder:
+
+Ife Dayo
+
+Primary message:
+
+Faith. Purpose. Growth.
+
+Possible supporting statement:
+
+"Finding God. Discovering Purpose. Becoming More."
+
+The visual identity should be:
+
+Minimal
+Elegant
+Warm
+Spiritual
+Editorial
+Modern
+Authentic
+Mobile-first
+
+Avoid:
+
+Excessive church imagery
+Overuse of crosses
+Flashy gradients
+Excessive gold
+Generic church templates
+Overly complicated animations
+Crowded layouts
+
+The website should feel closer to a premium Christian magazine, personal ministry platform, and digital journal.
+
+4. COLOUR SYSTEM
+
+Use a warm neutral palette.
+
+Primary background:
+
+#F8F6F0
+
+Primary text:
+
+#171717
+
+Secondary dark:
+
+#344236
+
+Accent:
+
+#B89B5E
+
+Secondary background:
+
+#E8E1D4
+
+White:
+
+#FFFFFF
+
+Do not overuse the accent colour.
+
+Use it mainly for:
+
+Buttons
+Small labels
+Dividers
+Icons
+Highlights
+5. TYPOGRAPHY
+
+Use an elegant serif font for major headings.
+
+Recommended:
+
+Playfair Display
+Cormorant Garamond
+
+Use a clean sans-serif for body text:
+
+Inter
+Manrope
+DM Sans
+
+Typography should create an editorial and premium feeling.
+
+Large headings should have generous spacing.
+
+Body text should be highly readable.
+
+6. HOMEPAGE
+
+The homepage should be dynamic.
+
+Do not hardcode blog posts, programs, resources, or other content.
+
+Content should come from Supabase.
+
+Navbar
+
+Desktop:
+
+Spiritual Journey logo
+
+Home
+Blog
+Programs
+Teachings
+Audio
+Resources
+About
+
+CTA:
+
+Start Your Journey
+
+Mobile:
+
+Logo
+Menu button
+
+The navbar should remain clean and lightweight.
+
+7. HERO SECTION
+
+Create a strong editorial hero.
+
+Headline:
+
+"Finding God. Discovering Purpose. Becoming More."
+
+Supporting copy:
+
+"Spiritual Journey is a space for biblical reflections, honest conversations, teachings and resources designed to help you grow in your walk with God."
+
+Buttons:
+
+Explore Teachings
+
+Meet Ife Dayo
+
+Use an authentic founder image on the opposite side or underneath on mobile.
+
+Do not use generic stock photography if a real founder image is available.
+
+8. FEATURED CONTENT
+
+Create a dynamic section:
+
+Featured From The Journey
+
+Display the latest or manually featured articles.
+
+Each card should contain:
+
+Image
+Category
+Title
+Excerpt
+Date
+Read time
+Read article button
+
+Allow admins to mark posts as featured.
+
+9. TODAY'S WORD
+
+Create a visually distinct section.
+
+Title:
+
+Today's Word
+
+Display:
+
+Scripture
+Bible reference
+Short reflection
+Optional background image
+
+Example:
+
+"Be still, and know that I am God."
+
+Psalm 46:10
+
+Button:
+
+Read Reflection
+
+The admin must be able to create and manage these reflections.
+
+10. BLOG
+
+The blog is one of the core features.
+
+Route:
+
+/blog
+
+Display:
+
+Featured article
+Latest articles
+Categories
+Search
+Pagination or load more
+
+Categories may include:
+
+Faith
+Purpose
+Identity
+Spiritual Growth
+Prayer
+Relationships
+Christian Living
+Devotional
+Leadership
+
+Each article should have:
+
+Featured image
+Title
+Slug
+Excerpt
+Content
+Category
+Tags
+Author
+Publication date
+Reading time
+Featured status
+SEO metadata
+11. BLOG ARTICLE PAGE
+
+Route:
+
+/blog/
+
+Layout:
+
+Large featured image
+
+Category
+
+Article title
+
+Author
+
+Publication date
+
+Reading time
+
+Article body
+
+Related articles
+
+Share buttons
+
+Newsletter CTA
+
+The article body should support rich content:
+
+Headings
+Paragraphs
+Bold
+Italics
+Lists
+Quotes
+Links
+Images
+Embedded YouTube videos
+Embedded audio
+
+Use a proper rich-text editor in the admin dashboard.
+
+Do not make the admin manually write HTML.
+
+12. PROGRAMS
+
+Create a dedicated upcoming-program system.
+
+Route:
+
+/programs
+
+Admins can create programs such as:
+
+Conferences
+Worship nights
+Bible studies
+Online sessions
+Workshops
+Retreats
+Community events
+
+Each program contains:
+
+Title
+Slug
+Description
+Featured image
+Date
+Start time
+End time
+Venue
+Address
+Speaker
+Registration URL
+Category
+Status
+
+Program statuses:
+
+Draft
+Published
+Cancelled
+Completed
+
+The homepage should automatically display upcoming programs.
+
+Past programs should move into a past-events section.
+
+13. AUDIO
+
+Create an audio content section.
+
+Route:
+
+/audio
+
+Each audio item contains:
+
+Title
+Description
+Cover image
+Audio URL
+Duration
+Category
+Publication date
+Featured status
+
+Create a beautiful audio player.
+
+The user should be able to:
+
+Play
+Pause
+Seek
+Adjust volume
+
+Do not upload large audio files directly to the database.
+
+Use Supabase Storage or an external audio URL.
+
+14. VIDEOS
+
+Route:
+
+/videos
+
+Allow the admin to add:
+
+YouTube videos
+Vimeo videos
+Other supported external video URLs
+
+Each video contains:
+
+Title
+Description
+Thumbnail
+Video URL
+Category
+Publication date
+Featured status
+
+Do not store large video files inside PostgreSQL.
+
+Use external video hosting.
+
+15. RESOURCES
+
+Route:
+
+/resources
+
+Resources can include:
+
+Ebooks
+Devotionals
+Bible study guides
+PDF guides
+Audio resources
+Other downloadable materials
+
+Each resource contains:
+
+Title
+Description
+Cover image
+Resource type
+Download URL
+External purchase URL
+Price if applicable
+Featured status
+Publication status
+
+Initially support free resources and external purchase links.
+
+Do not build complicated ecommerce into the MVP.
+
+16. ABOUT PAGE
+
+Create a beautiful founder-focused page.
+
+Title:
+
+"Meet Ife Dayo"
+
+Explain:
+
+Ife Dayo is the founder behind Spiritual Journey and a creative storyteller passionate about God's Word, purpose, identity and personal transformation.
+
+Include:
+
+Founder portrait
+Short biography
+Story
+Mission
+Vision
+Creative work
+Social links
+
+Use a personal, editorial layout rather than a corporate biography.
+
+17. CONTACT PAGE
+
+Create a simple contact form.
+
+Fields:
+
+Name
+Email
+Subject
+Message
+
+Store submissions in Supabase.
+
+Admin should be able to view:
+
+Unread messages
+Read messages
+Archived messages
+
+Optional email notification can be sent to the administrator using Resend.
+
+18. NEWSLETTER
+
+Create:
+
+"Walk With Us"
+
+Supporting text:
+
+"Receive new reflections, teachings and resources directly in your inbox."
+
+Fields:
+
+Email
+
+Button:
+
+Join the Journey
+
+Store subscribers in Supabase.
+
+Prevent duplicate email subscriptions.
+
+Include unsubscribe functionality when email campaigns are introduced.
+
+19. ADMIN DASHBOARD
+
+Create a completely separate admin experience.
+
+The admin dashboard should have:
+
+Sidebar navigation
+
+Dashboard
+Posts
+Programs
+Media
+Audio
+Videos
+Resources
+Categories
+Messages
+Subscribers
+Settings
+
+Use a clean dashboard design.
+
+Do not make the admin look identical to the public website.
+
+20. ADMIN DASHBOARD HOME
+
+Display:
+
+Total Posts
+
+Published Posts
+
+Upcoming Programs
+
+Resources
+
+Audio Items
+
+Video Items
+
+Subscribers
+
+Unread Messages
+
+Also display:
+
+Recent Posts
+
+Upcoming Programs
+
+Recent Messages
+
+Quick actions:
+
+Create Post
+
+Create Program
+
+Upload Media
+
+Add Resource
+
+21. POST MANAGEMENT
+
+Admin can:
+
+Create
+Edit
+Delete
+Publish
+Unpublish
+Archive
+Feature
+Search
+Filter by category
+
+Post editor:
+
+Title
+
+Slug
+
+Featured image
+
+Excerpt
+
+Rich content editor
+
+Category
+
+Tags
+
+SEO title
+
+SEO description
+
+Featured toggle
+
+Status
+
+Publish date
+
+Save Draft
+
+Publish
+
+22. MEDIA LIBRARY
+
+Create a media management system.
+
+Admin can upload images to Supabase Storage.
+
+Supported:
+
+JPG
+JPEG
+PNG
+WEBP
+
+Display:
+
+Thumbnail
+Filename
+File size
+Upload date
+
+Actions:
+
+Copy URL
+Delete
+Use image
+
+Optimize images before display where possible.
+
+Use lazy loading.
+
+23. DATABASE DESIGN
+
+Use Supabase PostgreSQL.
+
+Tables:
+
+profiles
+
+categories
+
+posts
+
+post_tags
+
+tags
+
+programs
+
+audio
+
+videos
+
+resources
+
+daily_reflections
+
+media
+
+contact_messages
+
+newsletter_subscribers
+
+site_settings
+
+24. PROFILES TABLE
+
+Fields:
+
+id
+user_id
+full_name
+avatar_url
+role
+created_at
+updated_at
+
+Roles:
+
+admin
+
+Keep the system ready for additional roles later.
+
+25. POSTS TABLE
+
+Fields:
+
+id
+title
+slug
+excerpt
+content
+featured_image
+category_id
+author_id
+status
+featured
+reading_time
+seo_title
+seo_description
+published_at
+created_at
+updated_at
+
+Status:
+
+draft
+published
+archived
+
+Slug must be unique.
+
+26. CATEGORIES TABLE
+
+Fields:
+
+id
+name
+slug
+description
+created_at
+
+Category slug must be unique.
+
+27. PROGRAMS TABLE
+
+Fields:
+
+id
+title
+slug
+description
+featured_image
+event_date
+start_time
+end_time
+venue
+address
+speaker
+registration_url
+category_id
+status
+created_at
+updated_at
+
+28. AUDIO TABLE
+
+Fields:
+
+id
+title
+slug
+description
+cover_image
+audio_url
+duration
+category_id
+featured
+status
+published_at
+created_at
+updated_at
+
+29. VIDEOS TABLE
+
+Fields:
+
+id
+title
+slug
+description
+thumbnail
+video_url
+category_id
+featured
+status
+published_at
+created_at
+updated_at
+
+30. RESOURCES TABLE
+
+Fields:
+
+id
+title
+slug
+description
+cover_image
+resource_type
+resource_url
+purchase_url
+price
+featured
+status
+published_at
+created_at
+updated_at
+
+31. DAILY REFLECTIONS
+
+Fields:
+
+id
+title
+scripture
+reference
+reflection
+image
+status
+publish_date
+created_at
+updated_at
+
+This allows Spiritual Journey to publish daily or scheduled reflections.
+
+32. CONTACT MESSAGES
+
+Fields:
+
+id
+name
+email
+subject
+message
+status
+created_at
+
+Status:
+
+unread
+read
+archived
+
+33. NEWSLETTER SUBSCRIBERS
+
+Fields:
+
+id
+email
+status
+subscribed_at
+unsubscribed_at
+
+Email must be unique.
+
+34. SUPABASE SECURITY
+
+Implement proper Row Level Security.
+
+Public users should only be able to read:
+
+Published posts
+Published programs
+Published audio
+Published videos
+Published resources
+Published reflections
+Public categories
+
+Only authenticated administrators can:
+
+Create
+Update
+Delete
+Publish
+Archive
+Manage media
+View messages
+View subscribers
+
+Never expose Supabase service-role keys in frontend code.
+
+Use only the public anon key in the browser.
+
+35. RESPONSIVE DESIGN
+
+The entire application must work properly on:
+
+Mobile
+Tablet
+Laptop
+Desktop
+Large desktop
+
+Mobile is a priority because social-media visitors will be a major source of traffic.
+
+Do not simply shrink desktop layouts.
+
+Create proper mobile layouts.
+
+36. PERFORMANCE
+
+Optimize for:
+
+Fast initial load
+Lazy-loaded images
+Optimized images
+Code splitting
+Minimal JavaScript
+Proper caching
+SEO-friendly pages
+Semantic HTML
+
+Avoid unnecessary animation libraries.
+
+37. SEO
+
+Each article and program must have dynamic:
+
+Page title
+Meta description
+Open Graph image
+Canonical URL
+
+Generate:
+
+/sitemap.xml
+
+and:
+
+/robots.txt
+
+Use clean URLs.
+
+Example:
+
+/blog/when-god-seems-silent
+
+not:
+
+/blog?id=123
+
+38. ERROR HANDLING
+
+Create proper:
+
+404 page
+Empty states
+Loading states
+Error states
+Form validation
+Upload errors
+Authentication errors
+
+Never leave blank screens.
+
+39. DESIGN DETAILS
+
+Use:
+
+Large editorial typography
+Generous whitespace
+Rounded cards where appropriate
+Subtle borders
+Soft shadows
+Elegant hover effects
+Smooth transitions
+High-quality imagery
+
+Avoid excessive glassmorphism.
+
+Avoid excessive gradients.
+
+Avoid generic SaaS dashboard styling on the public website.
+
+40. COMPONENT ARCHITECTURE
+
+Use reusable React components.
+
+Examples:
+
+Navbar
+Footer
+Hero
+SectionHeading
+ArticleCard
+FeaturedArticle
+ProgramCard
+AudioCard
+VideoCard
+ResourceCard
+CategoryBadge
+SearchBar
+NewsletterForm
+AudioPlayer
+Pagination
+EmptyState
+LoadingSkeleton
+Modal
+Toast
+AdminSidebar
+AdminHeader
+DataTable
+RichTextEditor
+ImageUploader
+
+Do not duplicate components unnecessarily.
+
+41. STATE MANAGEMENT
+
+Do not introduce Redux unless the application genuinely requires it.
+
+Use:
+
+React state
+React context where appropriate
+Supabase queries
+Custom hooks
+
+Create reusable hooks such as:
+
+useAuth()
+
+usePosts()
+
+usePrograms()
+
+useResources()
+
+useAudio()
+
+useCategories()
+
+42. CONTENT MANAGEMENT EXPERIENCE
+
+The admin experience must be extremely simple.
+
+An administrator should be able to:
+
+Log in.
+Click New Post.
+Upload an image.
+Write content.
+Select category.
+Preview.
+Publish.
+
+No technical knowledge should be required.
+
+43. HOMEPAGE CONTENT ORDER
+
+Recommended homepage:
+
+Navbar
+Hero
+Featured Story
+Latest Articles
+Today's Word
+Upcoming Programs
+Audio
+About Ife Dayo
+Featured Resources
+Newsletter
+Footer
+
+Keep the homepage relatively short.
+
+Do not put every piece of content on the homepage.
+
+44. SOCIAL MEDIA
+
+Include links for:
+
+Instagram
+YouTube
+Facebook
+TikTok
+X
+
+Social URLs should be configurable from the admin settings rather than hardcoded throughout the application.
+
+45. SETTINGS
+
+Admin settings should include:
+
+Site name
+
+Site description
+
+Logo
+
+Favicon
+
+Founder name
+
+Founder bio
+
+Founder image
+
+Instagram URL
+
+YouTube URL
+
+Facebook URL
+
+TikTok URL
+
+X URL
+
+Contact email
+
+Newsletter email
+
+Footer copyright
+
+SEO defaults
+
+46. AUTHENTICATION
+
+Admin login:
+
+Email
+Password
+
+Implement:
+
+Secure authentication
+Session persistence
+Logout
+Protected routes
+Auth state loading
+Password reset
+
+Do not create public registration.
+
+Only an existing administrator should be able to access the dashboard.
+
+47. MVP PRIORITY
+
+Build the following first:
+
+P0 - Required
+
+React/Vite application
+
+Supabase setup
+
+Admin authentication
+
+Admin dashboard
+
+Posts
+
+Categories
+
+Media upload
+
+Programs
+
+Homepage
+
+Blog page
+
+Blog detail page
+
+About page
+
+Contact form
+
+Responsive navigation
+
+SEO basics
+
+Supabase RLS
+
+Vercel deployment readiness
+
+48. P1
+
+After P0:
+
+Audio
+
+Videos
+
+Resources
+
+Daily reflections
+
+Newsletter
+
+Search
+
+Featured content
+
+Admin settings
+
+Social sharing
+
+49. P2
+
+Future:
+
+Comments
+
+User accounts
+
+Private spiritual journals
+
+Prayer requests
+
+Reading progress
+
+Saved articles
+
+Devotional plans
+
+Push notifications
+
+Podcast integration
+
+Analytics dashboard
+
+Email campaigns
+
+Paid ebooks
+
+Membership
+
+Donations
+
+Events registration
+
+Community features
+
+50. IMPORTANT PRODUCT PRINCIPLE
+
+Do not overbuild the first version.
+
+The goal is not to create another complicated church management system.
+
+The goal is to create a beautiful digital home for Spiritual Journey.
+
+The public experience should be:
+
+Calm.
+
+Personal.
+
+Readable.
+
+Meaningful.
+
+Modern.
+
+The admin experience should be:
+
+Fast.
+
+Simple.
+
+Clear.
+
+Easy to manage.
+
+51. DEVELOPMENT ORDER
+
+Build in this exact order:
+
+Phase 1:
+Project initialization and design system.
+
+Phase 2:
+Supabase project and database schema.
+
+Phase 3:
+Authentication and admin protection.
+
+Phase 4:
+Admin dashboard shell.
+
+Phase 5:
+Blog/content management.
+
+Phase 6:
+Media management.
+
+Phase 7:
+Programs.
+
+Phase 8:
+Public homepage.
+
+Phase 9:
+Blog pages.
+
+Phase 10:
+About and contact.
+
+Phase 11:
+Audio, video and resources.
+
+Phase 12:
+SEO and performance.
+
+Phase 13:
+Testing.
+
+Phase 14:
+Vercel deployment.
+
+52. FINAL QUALITY REQUIREMENT
+
+Do not produce a generic template.
+
+The website should clearly feel like it belongs to:
+
+SPIRITUAL JOURNEY
+
+and should reflect the creative identity of:
+
+IFE DAYO
+
+Use the supplied reference image of the existing Spiritual Journey/Ifedayо social presence as inspiration for the visual direction, while creating a more polished and consistent brand system.
+
+The finished product should feel like a real production website that could be publicly launched, not a demo or coding exercise.
+
+Prioritize:
+
+Design quality
+Content readability
+Mobile experience
+Security
+Performance
+Accessibility
+Maintainability
+Simple administration
+
+Build the application cleanly with reusable components and a scalable architecture.
+
+MVP at a glance
+Feature	MVP
+React + Vite	✅
+TypeScript	✅
+Tailwind	✅
+Supabase	✅
+Admin login	✅
+Admin dashboard	✅
+Blog	✅
+Rich text editor	✅
+Image upload	✅
+Categories	✅
+Featured posts	✅
+Programs/events	✅
+Homepage CMS content	✅
+About Ife Dayo	✅
+Contact form	✅
+SEO	✅
+Responsive design	✅
+Audio	Phase 2
+Video	Phase 2
+Ebooks/resources	Phase 2
+Newsletter	Phase 2
+Prayer requests	Future
+User accounts	Future
+Donations	Future
