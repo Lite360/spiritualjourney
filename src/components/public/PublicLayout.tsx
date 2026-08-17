@@ -1,10 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Outlet, Link, NavLink } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+import { supabase } from '../../lib/supabase';
 import logo from '../../assets/logo.png';
 
 export const PublicLayout: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [siteSettings, setSiteSettings] = useState<any>(null);
+
+  useEffect(() => {
+    fetchSettings();
+  }, []);
+
+  const fetchSettings = async () => {
+    const { data } = await supabase.from('site_settings').select('*').limit(1).single();
+    if (data) setSiteSettings(data);
+  };
 
   const navLinks = [
     { name: 'Home', path: '/' },
@@ -110,7 +121,7 @@ export const PublicLayout: React.FC = () => {
                 <img src={logo} alt="Spiritual Journey" className="h-10 w-auto" />
               </Link>
               <p className="text-primary-bg/70 max-w-sm">
-                A space for biblical reflections, honest conversations, teachings and resources designed to help you grow in your walk with God.
+                {siteSettings?.site_description || 'A space for biblical reflections, honest conversations, teachings and resources designed to help you grow in your walk with God.'}
               </p>
             </div>
             <div>
@@ -125,15 +136,18 @@ export const PublicLayout: React.FC = () => {
             <div>
               <h4 className="font-serif text-lg mb-4 text-accent">Connect</h4>
               <ul className="space-y-2 text-primary-bg/80">
-                <li><Link to="/about" className="hover:text-white transition-colors">About Ife Dayo</Link></li>
+                <li><Link to="/about" className="hover:text-white transition-colors">About {siteSettings?.founder_name || 'Ife Dayo'}</Link></li>
                 <li><Link to="/contact" className="hover:text-white transition-colors">Contact</Link></li>
-                <li><a href="#" className="hover:text-white transition-colors">Instagram</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">YouTube</a></li>
+                {siteSettings?.instagram_url && <li><a href={siteSettings.instagram_url} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Instagram</a></li>}
+                {siteSettings?.youtube_url && <li><a href={siteSettings.youtube_url} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">YouTube</a></li>}
+                {siteSettings?.facebook_url && <li><a href={siteSettings.facebook_url} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Facebook</a></li>}
+                {siteSettings?.tiktok_url && <li><a href={siteSettings.tiktok_url} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">TikTok</a></li>}
+                {siteSettings?.x_url && <li><a href={siteSettings.x_url} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">X (Twitter)</a></li>}
               </ul>
             </div>
           </div>
           <div className="border-t border-primary-bg/20 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-primary-bg/50">
-            <p>&copy; {new Date().getFullYear()} Spiritual Journey. All rights reserved.</p>
+            <p>{siteSettings?.footer_copyright || `© ${new Date().getFullYear()} ${siteSettings?.site_name || 'Spiritual Journey'}. All rights reserved.`}</p>
             <div className="mt-4 md:mt-0 space-x-4">
               <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
               <a href="#" className="hover:text-white transition-colors">Terms of Service</a>

@@ -1,8 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { supabase } from '../../lib/supabase';
 import { Send, MapPin, Mail, Phone } from 'lucide-react';
 
 const Contact: React.FC = () => {
+  const [siteSettings, setSiteSettings] = useState<any>(null);
+
+  useEffect(() => {
+    fetchSettings();
+  }, []);
+
+  const fetchSettings = async () => {
+    const { data } = await supabase.from('site_settings').select('*').limit(1).single();
+    if (data) setSiteSettings(data);
+  };
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -72,7 +83,7 @@ const Contact: React.FC = () => {
                 </div>
                 <div>
                   <h3 className="font-serif text-lg text-primary-text mb-1">Email</h3>
-                  <p className="text-secondary-dark/70 font-sans">hello@spiritualjourney.com</p>
+                  <p className="text-secondary-dark/70 font-sans">{siteSettings?.contact_email || 'hello@spiritualjourney.com'}</p>
                 </div>
               </div>
               

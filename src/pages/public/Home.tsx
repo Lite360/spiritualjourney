@@ -8,6 +8,7 @@ const Home: React.FC = () => {
   const [latestPosts, setLatestPosts] = useState<any[]>([]);
   const [upcomingPrograms, setUpcomingPrograms] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [siteSettings, setSiteSettings] = useState<any>(null);
 
   useEffect(() => {
     fetchHomepageData();
@@ -15,6 +16,10 @@ const Home: React.FC = () => {
 
   const fetchHomepageData = async () => {
     setLoading(true);
+
+    // Fetch settings
+    const { data: settingsData } = await supabase.from('site_settings').select('*').limit(1).single();
+    if (settingsData) setSiteSettings(settingsData);
     
     // Fetch latest posts
     const { data: latestData } = await supabase
@@ -59,7 +64,7 @@ const Home: React.FC = () => {
           <div className="inline-flex items-center gap-3 mb-10">
             <span className="h-px w-8 bg-accent" />
             <span className="text-xs font-sans font-semibold tracking-[0.2em] text-accent uppercase">
-              Spiritual Journey
+              {siteSettings?.site_name || 'Spiritual Journey'}
             </span>
             <span className="h-px w-8 bg-accent" />
           </div>
@@ -80,7 +85,7 @@ const Home: React.FC = () => {
 
           {/* Sub-copy */}
           <p className="text-lg md:text-xl text-white/75 font-sans leading-relaxed max-w-2xl mx-auto mb-12">
-            Spiritual Journey is a space for biblical reflections, honest conversations, teachings and resources designed to help you grow in your walk with God.
+            {siteSettings?.site_description || 'Spiritual Journey is a space for biblical reflections, honest conversations, teachings and resources designed to help you grow in your walk with God.'}
           </p>
 
           {/* CTAs */}
@@ -96,7 +101,7 @@ const Home: React.FC = () => {
               to="/about"
               className="inline-flex items-center gap-2 px-9 py-4 bg-white/10 backdrop-blur-sm border border-white/30 text-white text-base font-sans font-medium rounded-full hover:bg-white/20 transition-all duration-200"
             >
-              Meet Ife Dayo
+              Meet {siteSettings?.founder_name || 'Ife Dayo'}
             </Link>
           </div>
 
