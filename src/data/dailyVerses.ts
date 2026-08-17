@@ -38,9 +38,19 @@ export const dailyVerses: Verse[] = [
 ];
 
 export const getDailyVerse = (): Verse => {
-  // Use the day of the month (1-31) to pick a verse. 
-  // We subtract 1 to get a 0-based index.
-  const dayOfMonth = new Date().getDate(); 
-  const index = (dayOfMonth - 1) % dailyVerses.length;
+  // Use the current date (YYYY-MM-DD) as a seed for a pseudo-random number
+  // This ensures the verse changes every day, but doesn't predictably repeat 
+  // on the same day every month like a simple modulus would.
+  const today = new Date();
+  const seedString = `${today.getFullYear()}${today.getMonth()}${today.getDate()}`;
+  const seed = parseInt(seedString, 10);
+  
+  // Simple seeded random function
+  const random = (s: number) => {
+    const x = Math.sin(s) * 10000;
+    return x - Math.floor(x);
+  };
+  
+  const index = Math.floor(random(seed) * dailyVerses.length);
   return dailyVerses[index];
 };
