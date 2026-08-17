@@ -222,21 +222,62 @@ const Settings: React.FC = () => {
               />
             </div>
             <div>
-              <label className={labelClass}>Founder Photo URL</label>
-              <input
-                type="url"
-                value={settings.founder_image}
-                onChange={e => update('founder_image', e.target.value)}
-                className={inputClass}
-                placeholder="https://..."
-              />
-              {settings.founder_image && (
-                <img
-                  src={settings.founder_image}
-                  alt="Founder preview"
-                  className="mt-3 w-24 h-24 rounded-full object-cover border-2 border-secondary-surface"
-                />
-              )}
+              <label className={labelClass}>Founder Photo</label>
+              
+              <div className="flex items-center space-x-6 mt-2">
+                <div className="flex-shrink-0">
+                  {settings.founder_image ? (
+                    <img
+                      src={settings.founder_image}
+                      alt="Founder"
+                      className="h-24 w-24 object-cover rounded-full border-4 border-secondary-surface"
+                    />
+                  ) : (
+                    <div className="h-24 w-24 rounded-full bg-secondary-surface flex items-center justify-center border-4 border-white shadow-sm">
+                      <User className="h-10 w-10 text-primary-main/30" />
+                    </div>
+                  )}
+                </div>
+                
+                <div>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={async (e) => {
+                      if (!e.target.files || e.target.files.length === 0) return;
+                      const file = e.target.files[0];
+                      const fileExt = file.name.split('.').pop();
+                      const fileName = `${Math.random().toString(36).substring(2)}_${Date.now()}.${fileExt}`;
+                      const filePath = `settings/${fileName}`;
+
+                      try {
+                        const { error: uploadError } = await supabase.storage
+                          .from('media')
+                          .upload(filePath, file);
+
+                        if (uploadError) throw uploadError;
+
+                        const { data } = supabase.storage
+                          .from('media')
+                          .getPublicUrl(filePath);
+
+                        update('founder_image', data.publicUrl);
+                      } catch (err: any) {
+                        alert('Error uploading image: ' + err.message);
+                      }
+                    }}
+                    className="block w-full text-sm font-sans text-primary-text
+                      file:mr-4 file:py-2 file:px-4
+                      file:rounded-md file:border-0
+                      file:text-sm file:font-semibold
+                      file:bg-accent file:text-white
+                      hover:file:bg-accent/90 cursor-pointer"
+                  />
+                  <p className="text-xs font-sans text-primary-main/50 mt-2">
+                    Upload a high-quality square image. Recommended size: 400x400px.
+                  </p>
+                </div>
+              </div>
             </div>
           </>
         )}
