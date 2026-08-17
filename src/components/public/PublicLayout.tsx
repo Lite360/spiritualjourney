@@ -147,7 +147,20 @@ export const PublicLayout: React.FC = () => {
             </div>
           </div>
           <div className="border-t border-primary-bg/20 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-primary-bg/50">
-            <p>{siteSettings?.footer_copyright || `© ${new Date().getFullYear()} ${siteSettings?.site_name || 'Spiritual Journey'}. All rights reserved.`}</p>
+            <div className="flex flex-col space-y-2">
+              <p>{siteSettings?.footer_copyright || `© ${new Date().getFullYear()} ${siteSettings?.site_name || 'Spiritual Journey'}. All rights reserved.`}</p>
+              <p>
+                Developed by{' '}
+                <a 
+                  href="https://wa.me/2349054256786" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-accent hover:text-white transition-colors font-medium"
+                >
+                  Elite Developers
+                </a>
+              </p>
+            </div>
             <div className="mt-4 md:mt-0 space-x-4">
               <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
               <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
