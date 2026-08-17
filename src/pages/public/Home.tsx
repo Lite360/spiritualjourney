@@ -4,12 +4,14 @@ import { Link } from 'react-router-dom';
 import { format } from 'date-fns';
 import { ArrowRight, BookOpen, Calendar } from 'lucide-react';
 import { useSEO } from '../../hooks/useSEO';
+import { getDailyVerse } from '../../data/dailyVerses';
 
 const Home: React.FC = () => {
   const [latestPosts, setLatestPosts] = useState<any[]>([]);
   const [upcomingPrograms, setUpcomingPrograms] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [siteSettings, setSiteSettings] = useState<any>(null);
+  const dailyVerse = getDailyVerse();
 
   useSEO({
     title: undefined, // Home uses the bare site name
@@ -126,9 +128,9 @@ const Home: React.FC = () => {
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-sm font-sans tracking-widest text-accent uppercase mb-8">Today's Word</h2>
           <blockquote className="text-3xl md:text-4xl font-serif leading-relaxed mb-6">
-            "Be still, and know that I am God."
+            "{dailyVerse.text}"
           </blockquote>
-          <p className="text-lg font-sans text-primary-bg/70 mb-10">— Psalm 46:10</p>
+          <p className="text-lg font-sans text-primary-bg/70 mb-10">— {dailyVerse.reference}</p>
           <Link 
             to="/blog" 
             className="inline-flex items-center text-accent hover:text-white transition-colors font-sans font-medium"
