@@ -4,12 +4,26 @@ import { supabase } from '../../lib/supabase';
 import { format } from 'date-fns';
 import { ArrowLeft, Share2 } from 'lucide-react';
 import DOMPurify from 'dompurify';
+import { useSEO } from '../../hooks/useSEO';
 
 const BlogPost: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   const [post, setPost] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+
+  useSEO({
+    title: post?.seo_title || post?.title,
+    description: post?.seo_description || post?.excerpt,
+    image: post?.featured_image,
+    url: post ? `/blog/${post.slug}` : undefined,
+    type: 'article',
+    article: post ? {
+      publishedTime: post.published_at,
+      modifiedTime: post.updated_at,
+      author: post.profiles?.full_name || 'Ife Dayo',
+    } : undefined,
+  });
 
   useEffect(() => {
     fetchPost();
@@ -35,11 +49,6 @@ const BlogPost: React.FC = () => {
       }
 
       setPost(data);
-      
-      // Update document title for basic SEO
-      if (data.seo_title || data.title) {
-        document.title = `${data.seo_title || data.title} | Spiritual Journey`;
-      }
     } catch (error) {
       console.error('Error fetching post:', error);
       navigate('/blog');

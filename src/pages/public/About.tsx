@@ -2,9 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { supabase } from '../../lib/supabase';
+import { useSEO } from '../../hooks/useSEO';
 
 const About: React.FC = () => {
   const [siteSettings, setSiteSettings] = useState<any>(null);
+
+  useSEO({
+    title: `Meet ${siteSettings?.founder_name || 'Ife Dayo'}`,
+    description: siteSettings?.founder_bio?.slice(0, 160) || 'Learn about Ife Dayo, the founder behind Spiritual Journey — a platform dedicated to helping individuals grow in their faith.',
+    url: '/about',
+  });
 
   useEffect(() => {
     fetchSettings();

@@ -3,12 +3,19 @@ import { supabase } from '../../lib/supabase';
 import { Link } from 'react-router-dom';
 import { format } from 'date-fns';
 import { ArrowRight, BookOpen, Calendar } from 'lucide-react';
+import { useSEO } from '../../hooks/useSEO';
 
 const Home: React.FC = () => {
   const [latestPosts, setLatestPosts] = useState<any[]>([]);
   const [upcomingPrograms, setUpcomingPrograms] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [siteSettings, setSiteSettings] = useState<any>(null);
+
+  useSEO({
+    title: undefined, // Home uses the bare site name
+    description: siteSettings?.site_description || 'Spiritual Journey is a space for biblical reflections, honest conversations, teachings and resources designed to help you grow in your walk with God.',
+    url: '/',
+  });
 
   useEffect(() => {
     fetchHomepageData();

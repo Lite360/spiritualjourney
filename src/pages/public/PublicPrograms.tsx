@@ -2,10 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { supabase } from '../../lib/supabase';
 import { format } from 'date-fns';
 import { Calendar, MapPin, Clock } from 'lucide-react';
+import { useSEO } from '../../hooks/useSEO';
 
 const PublicPrograms: React.FC = () => {
   const [programs, setPrograms] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+
+  useSEO({
+    title: 'Programs & Events',
+    description: 'Join upcoming spiritual programs, retreats, and events hosted by Spiritual Journey.',
+    url: '/programs',
+  });
 
   useEffect(() => {
     fetchPrograms();

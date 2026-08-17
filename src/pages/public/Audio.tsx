@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { supabase } from '../../lib/supabase';
 import { Headphones, Search } from 'lucide-react';
 import { format } from 'date-fns';
+import { useSEO } from '../../hooks/useSEO';
 
 const Audio: React.FC = () => {
   const [audioItems, setAudioItems] = useState<any[]>([]);
@@ -9,6 +10,12 @@ const Audio: React.FC = () => {
   const [search, setSearch] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [categories, setCategories] = useState<any[]>([]);
+
+  useSEO({
+    title: 'Audio & Podcasts',
+    description: 'Listen to sermons, devotionals, and spiritual conversations from Ife Dayo on Spiritual Journey.',
+    url: '/audio',
+  });
 
   useEffect(() => {
     fetchAudio();

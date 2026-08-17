@@ -3,15 +3,21 @@ import { supabase } from '../../lib/supabase';
 import { Link } from 'react-router-dom';
 import { format } from 'date-fns';
 import { ArrowRight, BookOpen, Search } from 'lucide-react';
+import { useSEO } from '../../hooks/useSEO';
 
 const Blog: React.FC = () => {
   const [posts, setPosts] = useState<any[]>([]);
   const [featuredPost, setFeaturedPost] = useState<any>(null);
   const [categories, setCategories] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+
+  useSEO({
+    title: 'Blog',
+    description: 'Biblical reflections, teachings, and honest conversations about faith, purpose, and spiritual growth.',
+    url: '/blog',
+  });
 
   useEffect(() => {
     fetchData();

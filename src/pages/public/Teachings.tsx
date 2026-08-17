@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { supabase } from '../../lib/supabase';
 import { PlayCircle, Search, Video } from 'lucide-react';
 import { format } from 'date-fns';
+import { useSEO } from '../../hooks/useSEO';
 
 const Teachings: React.FC = () => {
   const [videos, setVideos] = useState<any[]>([]);
@@ -9,6 +10,12 @@ const Teachings: React.FC = () => {
   const [search, setSearch] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [categories, setCategories] = useState<any[]>([]);
+
+  useSEO({
+    title: 'Teachings',
+    description: 'Watch sermons, devotionals, and video teachings from Spiritual Journey to grow in your faith.',
+    url: '/teachings',
+  });
 
   useEffect(() => {
     fetchVideos();

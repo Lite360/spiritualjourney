@@ -2,12 +2,19 @@ import React, { useEffect, useState } from 'react';
 import { supabase } from '../../lib/supabase';
 import { FileText, Search, Download, ExternalLink } from 'lucide-react';
 import { format } from 'date-fns';
+import { useSEO } from '../../hooks/useSEO';
 
 const Resources: React.FC = () => {
   const [resources, setResources] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [selectedType, setSelectedType] = useState<string>('');
+
+  useSEO({
+    title: 'Resources',
+    description: 'Download devotionals, reading plans, books, eBooks, and study guides to help you grow spiritually.',
+    url: '/resources',
+  });
 
   useEffect(() => {
     fetchResources();

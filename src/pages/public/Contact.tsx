@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../../lib/supabase';
 import { Send, MapPin, Mail, Phone } from 'lucide-react';
+import { useSEO } from '../../hooks/useSEO';
 
 const Contact: React.FC = () => {
   const [siteSettings, setSiteSettings] = useState<any>(null);
+
+  useSEO({
+    title: 'Contact',
+    description: 'Get in touch with the Spiritual Journey team. Have a question, prayer request, or want to invite Ife Dayo to speak?',
+    url: '/contact',
+  });
 
   useEffect(() => {
     fetchSettings();
