@@ -35,6 +35,8 @@ import Teachings from './pages/public/Teachings';
 import Audio from './pages/public/Audio';
 import PublicResources from './pages/public/Resources';
 import PublicPrograms from './pages/public/PublicPrograms';
+import PrivacyPolicy from './pages/public/PrivacyPolicy';
+import TermsOfService from './pages/public/TermsOfService';
 
 const App: React.FC = () => {
   return (
@@ -52,6 +54,8 @@ const App: React.FC = () => {
             <Route path="/resources" element={<PublicResources />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/privacy" element={<PrivacyPolicy />} />
+            <Route path="/terms" element={<TermsOfService />} />
           </Route>
 
           {/* Admin Routes */}
