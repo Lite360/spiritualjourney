@@ -222,18 +222,32 @@ const Settings: React.FC = () => {
               />
             </div>
             <div>
-              <label className={labelClass}>Founder Photo</label>
+              <label className={labelClass}>Founder Photos (Multiple allowed for animation)</label>
               
-              <div className="flex items-center space-x-6 mt-2">
-                <div className="flex-shrink-0">
+              <div className="flex flex-col space-y-4 mt-2">
+                <div className="flex flex-wrap gap-4">
                   {settings.founder_image ? (
-                    <img
-                      src={settings.founder_image}
-                      alt="Founder"
-                      className="h-24 w-24 object-cover rounded-full border-4 border-secondary-surface"
-                    />
+                    settings.founder_image.split(',').filter(Boolean).map((imgUrl, index) => (
+                      <div key={index} className="relative group">
+                        <img
+                          src={imgUrl}
+                          alt={`Founder ${index + 1}`}
+                          className="h-24 w-24 object-cover rounded-md border-2 border-secondary-surface"
+                        />
+                        <button
+                          onClick={() => {
+                            const newImages = settings.founder_image.split(',').filter(Boolean);
+                            newImages.splice(index, 1);
+                            update('founder_image', newImages.join(','));
+                          }}
+                          className="absolute top-1 right-1 bg-red-500 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity w-6 h-6 flex items-center justify-center text-xs"
+                        >
+                          ✕
+                        </button>
+                      </div>
+                    ))
                   ) : (
-                    <div className="h-24 w-24 rounded-full bg-secondary-surface flex items-center justify-center border-4 border-white shadow-sm">
+                    <div className="h-24 w-24 rounded-md bg-secondary-surface flex items-center justify-center border-2 border-dashed border-primary-main/30 shadow-sm">
                       <User className="h-10 w-10 text-primary-main/30" />
                     </div>
                   )}
@@ -243,27 +257,35 @@ const Settings: React.FC = () => {
                   <input
                     type="file"
                     accept="image/*"
+                    multiple
                     onChange={async (e) => {
                       if (!e.target.files || e.target.files.length === 0) return;
-                      const file = e.target.files[0];
-                      const fileExt = file.name.split('.').pop();
-                      const fileName = `${Math.random().toString(36).substring(2)}_${Date.now()}.${fileExt}`;
-                      const filePath = `settings/${fileName}`;
-
+                      
                       try {
-                        const { error: uploadError } = await supabase.storage
-                          .from('media')
-                          .upload(filePath, file);
+                        const newUrls: string[] = [];
+                        for (let i = 0; i < e.target.files.length; i++) {
+                          const file = e.target.files[i];
+                          const fileExt = file.name.split('.').pop();
+                          const fileName = `${Math.random().toString(36).substring(2)}_${Date.now()}.${fileExt}`;
+                          const filePath = `settings/${fileName}`;
 
-                        if (uploadError) throw uploadError;
+                          const { error: uploadError } = await supabase.storage
+                            .from('media')
+                            .upload(filePath, file);
 
-                        const { data } = supabase.storage
-                          .from('media')
-                          .getPublicUrl(filePath);
+                          if (uploadError) throw uploadError;
 
-                        update('founder_image', data.publicUrl);
+                          const { data } = supabase.storage
+                            .from('media')
+                            .getPublicUrl(filePath);
+                            
+                          newUrls.push(data.publicUrl);
+                        }
+                        
+                        const existingImages = settings.founder_image ? settings.founder_image.split(',').filter(Boolean) : [];
+                        update('founder_image', [...existingImages, ...newUrls].join(','));
                       } catch (err: any) {
-                        alert('Error uploading image: ' + err.message);
+                        alert('Error uploading images: ' + err.message);
                       }
                     }}
                     className="block w-full text-sm font-sans text-primary-text
@@ -274,7 +296,7 @@ const Settings: React.FC = () => {
                       hover:file:bg-accent/90 cursor-pointer"
                   />
                   <p className="text-xs font-sans text-primary-main/50 mt-2">
-                    Upload a high-quality square image. Recommended size: 400x400px.
+                    Upload multiple square images. They will fade between each other on the About page.
                   </p>
                 </div>
               </div>

@@ -21,6 +21,18 @@ const About: React.FC = () => {
     const { data } = await supabase.from('site_settings').select('*').limit(1).single();
     if (data) setSiteSettings(data);
   };
+
+  const founderImages = siteSettings?.founder_image ? siteSettings.founder_image.split(',').filter(Boolean) : [];
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    if (founderImages.length > 1) {
+      const interval = setInterval(() => {
+        setCurrentImageIndex((prev) => (prev + 1) % founderImages.length);
+      }, 4000); // Change image every 4 seconds
+      return () => clearInterval(interval);
+    }
+  }, [founderImages.length]);
   return (
     <div className="bg-primary-bg min-h-screen">
       {/* Hero Section */}
@@ -28,8 +40,17 @@ const About: React.FC = () => {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
           <div className="md:w-1/2">
             <div className="relative w-full aspect-[4/5] rounded-t-full bg-secondary-bg overflow-hidden shadow-lg border-8 border-white">
-              {siteSettings?.founder_image ? (
-                <img src={siteSettings.founder_image} alt={siteSettings.founder_name} className="absolute inset-0 w-full h-full object-cover" />
+              {founderImages.length > 0 ? (
+                founderImages.map((imgUrl: string, idx: number) => (
+                  <img 
+                    key={idx}
+                    src={imgUrl} 
+                    alt={`${siteSettings?.founder_name || 'Founder'} ${idx + 1}`} 
+                    className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
+                      idx === currentImageIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
+                    }`} 
+                  />
+                ))
               ) : (
                 <div className="absolute inset-0 bg-secondary-dark/10 flex items-center justify-center">
                   <span className="text-secondary-dark/30 font-serif text-2xl">{siteSettings?.founder_name || 'Ife Dayo'}</span>
