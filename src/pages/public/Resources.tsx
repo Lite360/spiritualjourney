@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { supabase } from '../../lib/supabase';
 import { FileText, Search, Download, ExternalLink } from 'lucide-react';
-import { format } from 'date-fns';
 import { useSEO } from '../../hooks/useSEO';
 
 const Resources: React.FC = () => {
